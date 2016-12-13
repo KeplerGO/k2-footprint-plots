@@ -24,6 +24,7 @@ pl.annotate('C5', xy=(127, 24), xycoords='data', ha='center',
 
 annotate_target(127.578771, +22.235908, "K2-34")
 
+
 text = pl.text(240.2, -23.2, 'Upper Sco', style='italic',
                zorder=999, fontsize=22, va='center', ha='center')
 text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
@@ -48,7 +49,7 @@ import pandas as pd
 df = pd.read_csv('catalogs/beehive.csv')
 for member in df.iterrows():
     annotate_target(member[1].RA_d, member[1].DEC_d, "", size=10, color='#c0392b')
-text = pl.text(130., 20.5, 'M44', style='italic', color='black',
+text = pl.text(130., 20.5, 'M44 (Beehive)', style='italic', color='black',
                zorder=999, fontsize=30, va='center', ha='center')
 text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                        path_effects.Normal()])
