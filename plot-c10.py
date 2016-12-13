@@ -22,7 +22,7 @@ pl.annotate('C1', xy=(179, -1), xycoords='data', ha='center',
             )
 
 annotate_target(187.27789633, 2.05240632, "3C 273")
-annotate_target(180.44154, -3.76128, "GW Vir", ha='right')
+annotate_target(180.44154, -3.76128, "PG 1159", ha='right')
 
 # Comet 67P/Churyumov–Gerasimenko
 ra = [183.52782, 183.88735, 184.25304, 184.62468, 185.00206, 185.38496, 185.96925]
@@ -50,5 +50,6 @@ pl.ylim([-11.8, 5.])
 p.ax.xaxis.set_major_locator(MultipleLocator(2))
 p.ax.yaxis.set_major_locator(MultipleLocator(2))
 pl.tight_layout()
-pl.savefig('k2-c{}-field.png'.format(CAMPAIGN), dpi=100)
+for extension in ['png', 'eps']:
+    pl.savefig('k2-c{}-field.{}'.format(CAMPAIGN, extension), dpi=100)
 pl.close()

@@ -48,7 +48,7 @@ import pandas as pd
 df = pd.read_csv('catalogs/beehive.csv')
 for member in df.iterrows():
     annotate_target(member[1].RA_d, member[1].DEC_d, "", size=10, color='#c0392b')
-text = pl.text(130.5, 20.5, 'M44', style='italic', color='#c0392b',
+text = pl.text(130., 20.5, 'M44', style='italic', color='black',
                zorder=999, fontsize=30, va='center', ha='center')
 text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                        path_effects.Normal()])
@@ -57,7 +57,7 @@ text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
 df = pd.read_csv('catalogs/m67.csv')
 for member in df.iterrows():
     annotate_target(member[1].RA_d, member[1].DEC_d, "", size=10, color='#c0392b')
-text = pl.text(132.8250 - 0.6, +11.8000, 'M67', style='italic', color='#c0392b',
+text = pl.text(132.8250 - 0.6, +11.8000, 'M67', style='italic', color='black',
                zorder=999, fontsize=30, va='center')
 text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                        path_effects.Normal()])
@@ -81,5 +81,6 @@ pl.ylim([11.3, 27])
 p.ax.xaxis.set_major_locator(MultipleLocator(2))
 p.ax.yaxis.set_major_locator(MultipleLocator(2))
 pl.tight_layout()
-pl.savefig('k2-c{}-field.png'.format(CAMPAIGN), dpi=100)
+for extension in ['png', 'eps']:
+    pl.savefig('k2-c{}-field.{}'.format(CAMPAIGN, extension), dpi=100)
 pl.close()

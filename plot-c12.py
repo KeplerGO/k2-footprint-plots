@@ -57,5 +57,6 @@ pl.ylim([-13.5, 5])
 p.ax.xaxis.set_major_locator(MultipleLocator(2))
 p.ax.yaxis.set_major_locator(MultipleLocator(2))
 pl.tight_layout()
-pl.savefig('k2-c{}-field.png'.format(CAMPAIGN), dpi=100)
+for extension in ['png', 'eps']:
+    pl.savefig('k2-c{}-field.{}'.format(CAMPAIGN, extension), dpi=100)
 pl.close()
