@@ -28,8 +28,14 @@ annotate_target(240.48106314, -21.98038959, "HIP 78530")
 annotate_target(226.948721, -16.460728, "L5 Dwarf", ha='right')
 annotate_target(232.39476389, -17.44094162, "33 Lib")
 
-text = pl.text(240.2, -23.2, 'Upper Sco', style='italic',
-               zorder=999, fontsize=22, va='center', ha='center')
+
+# Plot Upper Sco
+import pandas as pd
+df = pd.read_csv('catalogs/upper-sco.csv')
+for member in df.iterrows():
+    annotate_target(member[1].RA_d, member[1].DEC_d, "", size=15, color='#c0392b')
+text = pl.text(240.2, -23.2, 'Upper Sco', style='italic', color='#c0392b',
+               zorder=999, fontsize=30, va='center', ha='center')
 text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                        path_effects.Normal()])
 
