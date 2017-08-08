@@ -24,26 +24,6 @@ pl.annotate('C5', xy=(127, 24), xycoords='data', ha='center',
 
 annotate_target(127.578771, +22.235908, "K2-34")
 
-
-text = pl.text(240.2, -23.2, 'Upper Sco', style='italic',
-               zorder=999, fontsize=22, va='center', ha='center')
-text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
-                       path_effects.Normal()])
-
-#pl.scatter(132.8250, +11.8000, zorder=899, marker='o', lw=2, s=800,
-#           facecolor='black', alpha=0.5, edgecolor='None', label='M67')
-#text = pl.text(132.8250 - 0.5, +11.8000, 'M67', zorder=999,
-#              fontsize=22, va='center', color='black')
-#text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
-#                       path_effects.Normal()])
-
-#pl.scatter(130.1000, +19.6667, zorder=899, marker='o', lw=2, s=3500,
-#           facecolor='black', alpha=0.5, edgecolor='None', label='Beehive')
-#text = pl.text(130.1000 - 0.8, +19.6667, 'M44 (Beehive)', zorder=999,
-#               fontsize=22, va='center', color='black')
-#text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
-#                       path_effects.Normal()])
-
 # Plot the Beehive cluster
 import pandas as pd
 df = pd.read_csv('catalogs/beehive.csv')
