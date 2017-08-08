@@ -29,7 +29,7 @@ df = pd.read_csv('catalogs/hyades.csv')
 for member in df.iterrows():
     annotate_target(member[1].RA_d, member[1].DEC_d, "", size=15, color='#c0392b')
 
-text = pl.text(67, 16, 'Hyades', style='italic', color='#c0392b',
+text = pl.text(67, 16, 'Hyades', style='italic', color='black',
                zorder=999, fontsize=30, va='center', ha='center')
 text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                        path_effects.Normal()])
@@ -40,7 +40,7 @@ df = pd.read_csv('catalogs/pleiades.csv')
 for member in df.iterrows():
     annotate_target(member[1].RA_d, member[1].DEC_d, "", size=15, color='#c0392b')
 
-text = pl.text(52.5, 24.3, 'Pleiades', style='italic', color='#c0392b',
+text = pl.text(52.5, 24.3, 'Pleiades', style='italic', color='black',
                zorder=999, fontsize=30, va='center', ha='center')
 text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                        path_effects.Normal()])
