@@ -12,7 +12,7 @@ style.use('gray.mplstyle')
 p = plot.K2FootprintPlot(figsize=(11, 11))
 p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white', lw=1)
 
-#annotate_target(201.29824736, -11.16131949, "Spica")
+annotate_target(201.29824736, -11.16131949, "Spica")
 
 # Plot KEGS galaxies
 import pandas as pd
