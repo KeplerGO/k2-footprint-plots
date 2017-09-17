@@ -31,6 +31,8 @@ pl.annotate('C12', xy=(355., -11.2), xycoords='data',
             )
 
 annotate_target(346.62233, -5.04144, "TRAPPIST-1")
+annotate_target(351.77015194, -1.28627266, "GJ 9827")
+
 #annotate_target(348.9490380, -10.8496960, "K2-YYY")
 
 # Neptune
