@@ -23,19 +23,24 @@ pl.annotate('C6', xy=(211, -7.7), xycoords='data',
 
 # Plot C6 galaxies
 import pandas as pd
-df = pd.read_csv('catalogs/c6-kegs.csv')
+df = pd.read_csv('catalogs/c17-galaxies.csv')
 pl.scatter(df.ra, df.dec, lw=0, facecolor='#27ae60', s=3, zorder=99)
 #for member in df.iterrows():
 #    annotate_target(member[1].ra, member[1].dec, "", size=5, color='#c0392b')
 
-text = pl.text(203.5, -8.2, 'Galaxies', style='italic', color='#27ae60',
+text = pl.text(203.5, -5.6, 'Galaxies', style='italic', color='#27ae60',
                zorder=999, fontsize=30, va='center', ha='center')
 text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                        path_effects.Normal()])
 
 annotate_target(201.29824736, -11.16131949, "Spica", padding=0.5, zorder=9e4)
+annotate_target(201.655197, -8.317560, "K2-41")
 annotate_target(208.77375, -5.44247222, "K2-99")
 annotate_target(207.34954167, -12.2845, "K2-110")
+annotate_target(203.546539, -13.576928, "K2-126")
+annotate_target(207.078384, -11.588979, "K2-127")
+annotate_target(204.437653, -8.597065, "K2-128")
+
 #annotate_target(207.655875, -6.80402778, "Qatar-2")
 
 pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
