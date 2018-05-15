@@ -13,27 +13,27 @@ CAMPAIGN = 2
 
 style.use('gray.mplstyle')
 p = plot.K2FootprintPlot(figsize=(11, 11))
-p.plot_campaign(11, annotate_channels=False, facecolor='#aaaaaa', lw=0)
-p.plot_campaign(15, annotate_channels=False, facecolor='#aaaaaa', lw=0)
+#p.plot_campaign(11, annotate_channels=False, facecolor='#aaaaaa', lw=0)
+#p.plot_campaign(15, annotate_channels=False, facecolor='#aaaaaa', lw=0)
 
 p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white', lw=1)
 
-pl.annotate('C11', xy=(255.25, -16.75), xycoords='data', ha='center',
-            xytext=(40, 40), textcoords='offset points',
-            size=30, zorder=99999, color='#aaaaaa',
-            arrowprops=dict(arrowstyle="simple",
-                            fc="#aaaaaa", ec="none",
-                            connectionstyle="arc3,rad=0.0"),
-            )
+#pl.annotate('C11', xy=(255.25, -16.75), xycoords='data', ha='center',
+#            xytext=(40, 40), textcoords='offset points',
+#            size=30, zorder=99999, color='#aaaaaa',
+#            arrowprops=dict(arrowstyle="simple",
+#                            fc="#aaaaaa", ec="none",
+#                            connectionstyle="arc3,rad=0.0"),
+#            )
 
 
-pl.annotate('C15', xy=(239, -17.), xycoords='data', ha='center',
-            xytext=(-30, 40), textcoords='offset points',
-            size=30, zorder=99999, color='#aaaaaa',
-            arrowprops=dict(arrowstyle="simple",
-                            fc="#aaaaaa", ec="none",
-                            connectionstyle="arc3,rad=0.0"),
-            )
+#pl.annotate('C15', xy=(239, -17.), xycoords='data', ha='center',
+#            xytext=(-30, 40), textcoords='offset points',
+#            size=30, zorder=99999, color='#aaaaaa',
+#            arrowprops=dict(arrowstyle="simple",
+#                            fc="#aaaaaa", ec="none",
+#                            connectionstyle="arc3,rad=0.0"),
+#            )
 
 
 
@@ -54,10 +54,6 @@ annotate_target(c.ra.deg,c.dec.deg, "M4", extended=True)
 c=SkyCoord('16 17 02.41','-22 58 33.9',unit=(u.hourangle,u.deg))
 annotate_target(c.ra.deg,c.dec.deg, "M80", extended=True)
 
-c=SkyCoord('17 02 37.69','-26 16 04.6',unit=(u.hourangle,u.deg))
-annotate_target(c.ra.deg,c.dec.deg, "M19", extended=True)
-
-
 c=SkyCoord('16 25 35.11766','-23 26 49.8150',unit=(u.hourangle,u.deg))
 annotate_target(c.ra.deg,c.dec.deg, u"ρ Oph", extended=True)
 
@@ -70,13 +66,21 @@ annotate_target(240.08335535, -22.62170643, u"δ Sco")
 annotate_target(240.033579, -23.189292, "K2-38")
 annotate_target(229.35167, -21.01011, "NGC 5897", ha='right', extended=True)
 
-
-pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
 pl.xlim([256, 237])
 pl.ylim([-31, -14])
 p.ax.xaxis.set_major_locator(MultipleLocator(2))
 p.ax.yaxis.set_major_locator(MultipleLocator(2))
 pl.tight_layout()
+
 for extension in ['png', 'eps']:
-    pl.savefig('k2-c{}-field.{}'.format(CAMPAIGN, extension), dpi=100)
+    output_fn = 'output/k2-c{}-field-notitle.{}'.format(CAMPAIGN, extension) 
+    print('Writing {}'.format(output_fn))
+    pl.savefig(output_fn, dpi=100)
+
+pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
+for extension in ['png', 'eps']:
+    output_fn = 'output/k2-c{}-field.{}'.format(CAMPAIGN, extension) 
+    print('Writing {}'.format(output_fn))
+    pl.savefig(output_fn, dpi=100)
+
 pl.close()
