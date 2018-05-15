@@ -33,7 +33,6 @@ text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                        path_effects.Normal()])
 
 
-pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
 pl.xlim([346, 328])
 pl.ylim([-20, -1])
 p.ax.xaxis.set_major_locator(MultipleLocator(2))
@@ -44,12 +43,21 @@ pl.tight_layout()
 ylim=p.ax.get_ylim()
 xlim=p.ax.get_xlim()
 import pandas as pd
-df=pd.read_csv('catalogs/k2candidates.csv',comment='#')
+df = pd.read_csv('catalogs/k2candidates.csv', comment='#')
 for ra,dec,name in zip(df.ra,df.dec,df.pl_name):
 	if (ra>np.min(xlim)) and (ra<=np.max(xlim)) and (dec>np.min(ylim)) and (dec<=np.max(ylim)):
-		annotate_target(ra,dec,name,zorder=499)
+		annotate_target(ra, dec, name, padding=0.2, zorder=9e99, fontsize=16, size=60)
 
 
 for extension in ['png', 'eps']:
-    pl.savefig('k2-c{}-field.{}'.format(CAMPAIGN, extension), dpi=100)
+    output_fn = 'output/k2-c{}-field-notitle.{}'.format(CAMPAIGN, extension) 
+    print('Writing {}'.format(output_fn))
+    pl.savefig(output_fn, dpi=100)
+
+pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
+for extension in ['png', 'eps']:
+    output_fn = 'output/k2-c{}-field.{}'.format(CAMPAIGN, extension) 
+    print('Writing {}'.format(output_fn))
+    pl.savefig(output_fn, dpi=100)
+
 pl.close()
