@@ -32,7 +32,6 @@ c=SkyCoord('06 55 00.9','+18 01 14',unit=(u.hourangle,u.deg))
 annotate_target(c.ra.deg,c.dec.deg, "NGC 2304", extended=True)
 
 
-pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
 pl.xlim([107, 89])
 pl.ylim([12.5, 30])
 p.ax.xaxis.set_major_locator(MultipleLocator(2))
@@ -53,14 +52,22 @@ for ra,dec,name in zip(df.ra,df.dec,df.pl_name):
 
 df=pd.read_csv('catalogs/jupiter_c0.csv')
 
-c=SkyCoord(np.asarray(df.ra,dtype=str),np.asarray(df.dec,dtype=str),unit=(u.hourangle,u.deg))
+c = SkyCoord(np.asarray(df.ra,dtype=str), np.asarray(df.dec,dtype=str), unit=(u.hourangle,u.deg))
 pl.plot(c.ra.deg, c.dec.deg, lw=4, zorder=500, c='#2980b9')
 text = pl.text(104, 24, 'Jupiter', zorder=999, style='italic',
                fontsize=22, va='center', color='#2980b9')
 text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                        path_effects.Normal()])
 
-
 for extension in ['png', 'eps']:
-    pl.savefig('k2-c{}-field.{}'.format(CAMPAIGN, extension), dpi=100)
+    output_fn = 'output/k2-c{}-field-notitle.{}'.format(CAMPAIGN, extension) 
+    print('Writing {}'.format(output_fn))
+    pl.savefig(output_fn, dpi=100)
+
+pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
+for extension in ['png', 'eps']:
+    output_fn = 'output/k2-c{}-field.{}'.format(CAMPAIGN, extension) 
+    print('Writing {}'.format(output_fn))
+    pl.savefig(output_fn, dpi=100)
+
 pl.close()
