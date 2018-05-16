@@ -10,7 +10,7 @@ CAMPAIGN = 19
 
 style.use('gray.mplstyle')
 p = plot.K2FootprintPlot(figsize=(11, 11))
-#p.plot_ecliptic()
+# p.plot_ecliptic()
 p.plot_campaign(3, annotate_channels=False, facecolor='#aaaaaa', lw=0)
 p.plot_campaign(12, annotate_channels=False, facecolor='#bbbbbb', lw=0)
 p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white', lw=1)
@@ -45,12 +45,12 @@ text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
 
 # 2P/Encke
 import numpy as np
-encke_ra = np.array([ 352.76322,  352.85889,  352.94177,  353.01157,  353.06801,
-                      353.1108 ,  353.13966,  353.15432,  353.15449,  353.13992,
-                      353.11035,  353.06552,  353.00521,  352.92918,  352.83723,
-                      352.72917])
+encke_ra = np.array([352.76322,  352.85889,  352.94177,  353.01157,  353.06801,
+                     353.1108,  353.13966,  353.15432,  353.15449,  353.13992,
+                     353.11035,  353.06552,  353.00521,  352.92918,  352.83723,
+                     352.72917])
 encke_dec = np.array([-2.61381, -2.54609, -2.48333, -2.42564, -2.37315, -2.32596,
-                      -2.2842 , -2.24799, -2.21744, -2.19267, -2.17377, -2.16087,
+                      -2.2842, -2.24799, -2.21744, -2.19267, -2.17377, -2.16087,
                       -2.15407, -2.15345, -2.15912, -2.17115])
 pl.plot(encke_ra, encke_dec, lw=4, zorder=500, c='#2980b9')
 text = pl.text(352.6, -2.4, '2P/Encke', zorder=999, style='italic',

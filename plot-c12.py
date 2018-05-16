@@ -10,7 +10,7 @@ CAMPAIGN = 12
 
 style.use('gray.mplstyle')
 p = plot.K2FootprintPlot(figsize=(11, 11))
-#p.plot_ecliptic()
+# p.plot_ecliptic()
 p.plot_campaign(900, annotate_channels=False, facecolor='#aaaaaa', lw=0)
 p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white', lw=1)
 

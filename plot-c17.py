@@ -3,52 +3,65 @@ from matplotlib import style
 from matplotlib.ticker import MultipleLocator
 import matplotlib.patheffects as path_effects
 from K2fov import plot
+import numpy as np
 
 from fieldplot import annotate_target
-
+import pandas as pd
+style.use('wendy.mplstyle')
+colors = pl.rcParams["axes.prop_cycle"].by_key()["color"]
 CAMPAIGN = 17
 
-style.use('gray.mplstyle')
 p = plot.K2FootprintPlot(figsize=(11, 11))
-p.plot_campaign(6, annotate_channels=False, facecolor='#aaaaaa', lw=0)
-p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white', lw=1)
+p.plot_campaign(6, annotate_channels=False, facecolor=colors[5],
+                edgecolor=colors[5], lw=1, zorder=1)
+p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white',
+                edgecolor=colors[5], lw=1, zorder=2)
 
 pl.annotate('C6', xy=(211, -7.7), xycoords='data',
             xytext=(-40, 40), textcoords='offset points',
-            size=30, zorder=99999, color='#aaaaaa',
+            size=30, zorder=99999, color=colors[5],
             arrowprops=dict(arrowstyle="simple",
-                            fc="#aaaaaa", ec="none",
+                            fc=colors[5], ec="none",
                             connectionstyle="arc3,rad=0.0"),
             )
 
-# Plot C6 galaxies
-import pandas as pd
-df = pd.read_csv('catalogs/c17-galaxies.csv')
-pl.scatter(df.ra, df.dec, lw=0, facecolor='#27ae60', s=3, zorder=99)
-#for member in df.iterrows():
-#    annotate_target(member[1].ra, member[1].dec, "", size=5, color='#c0392b')
+# Planets
 
-text = pl.text(203.5, -5.6, 'Galaxies', style='italic', color='#27ae60',
-               zorder=999, fontsize=30, va='center', ha='center')
-text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
-                       path_effects.Normal()])
+ylim = p.ax.get_ylim()
+xlim = p.ax.get_xlim()
+df = pd.read_csv('catalogs/k2candidates.csv',
+                 comment='#').drop_duplicates(['pl_name']).dropna(subset=['pl_name'])
+df = df[df.k2_campaign == 6]
+df['pl_hostname'] = [d.split(' ')[0] for d in df['pl_name']]
+df['pl_letter'] = [d.split(' ')[1] for d in df['pl_name']]
+letters = np.asarray(df[['pl_hostname', 'pl_letter']].groupby(
+    'pl_hostname')['pl_letter'].apply(lambda x: ''.join(x)))
+df = df[['pl_hostname', 'ra', 'dec']].groupby('pl_hostname').max()
+df['pl_letters'] = letters
+ra, dec = np.asarray(df.ra), np.asarray(df.dec)
+pl_names = np.asarray(['{} {}'.format(n, l) for n, l in zip(df.index, df.pl_letters)])
+ok = (ra > np.min(xlim)) & (ra <= np.max(xlim)) & (dec > np.min(ylim)) & (dec <= np.max(ylim))
+annotate_target(ra[ok], dec[ok], pl_names[ok], padding=0.2,
+                zorder=10, fontsize=16, markersize=10, ls='', marker='.')
 
-annotate_target(201.29824736, -11.16131949, "Spica", padding=0.5, zorder=9e4)
-annotate_target(201.655197, -8.317560, "K2-41")
-annotate_target(208.77375, -5.44247222, "K2-99")
-annotate_target(207.34954167, -12.2845, "K2-110")
-annotate_target(203.546539, -13.576928, "K2-126")
-annotate_target(207.078384, -11.588979, "K2-127")
-annotate_target(204.437653, -8.597065, "K2-128")
 
-#annotate_target(207.655875, -6.80402778, "Qatar-2")
+annotate_target(201.29824736, -11.16131949, "Spica",
+                zorder=4, marker='o', markersize=5, color=colors[0])
 
-pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
 pl.xlim([212.9, 195.5])
 pl.ylim([-16., 1.2])
 p.ax.xaxis.set_major_locator(MultipleLocator(2))
 p.ax.yaxis.set_major_locator(MultipleLocator(2))
 pl.tight_layout()
+
 for extension in ['png', 'eps']:
-    pl.savefig('k2-c{}-field.{}'.format(CAMPAIGN, extension), dpi=100)
+    output_fn = 'output/k2-c{}-field-notitle.{}'.format(CAMPAIGN, extension)
+    print('Writing {}'.format(output_fn))
+    pl.savefig(output_fn, dpi=100)
+
+pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
+for extension in ['png', 'eps']:
+    output_fn = 'output/k2-c{}-field.{}'.format(CAMPAIGN, extension)
+    print('Writing {}'.format(output_fn))
+    pl.savefig(output_fn, dpi=100)
 pl.close()

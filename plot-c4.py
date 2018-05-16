@@ -3,28 +3,20 @@ from matplotlib import style
 from matplotlib.ticker import MultipleLocator
 import matplotlib.patheffects as path_effects
 from K2fov import plot
+import pandas as pd
 
 from fieldplot import annotate_target
 
 CAMPAIGN = 4
+style.use('wendy.mplstyle')
+colors = pl.rcParams["axes.prop_cycle"].by_key()["color"]
 
-style.use('gray.mplstyle')
 p = plot.K2FootprintPlot(figsize=(11, 11))
-#p.plot_ecliptic()
-#p.plot_campaign(13, annotate_channels=False, facecolor='#aaaaaa', lw=0)
-p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white', lw=1)
-
-#pl.annotate('C13', xy=(66.8, 26), xycoords='data', ha='center',
-#            xytext=(40, 40), textcoords='offset points',
-#            size=30, zorder=99999, color='#aaaaaa',
-#            arrowprops=dict(arrowstyle="simple",
-#                            fc="#aaaaaa", ec="none",
-#                            connectionstyle="arc3,rad=0.0"),
-#            )
+p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white',
+                edgecolor=colors[5], lw=1, zorder=1)
 
 
 # Plot the Hyades cluster
-import pandas as pd
 df = pd.read_csv('catalogs/hyades.csv')
 for member in df.iterrows():
     annotate_target(member[1].RA_d, member[1].DEC_d, "", size=15, color='#c0392b')
@@ -53,13 +45,13 @@ p.ax.yaxis.set_major_locator(MultipleLocator(2))
 pl.tight_layout()
 
 for extension in ['png', 'eps']:
-    output_fn = 'output/k2-c{}-field-notitle.{}'.format(CAMPAIGN, extension) 
+    output_fn = 'output/k2-c{}-field-notitle.{}'.format(CAMPAIGN, extension)
     print('Writing {}'.format(output_fn))
     pl.savefig(output_fn, dpi=100)
 
 pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
 for extension in ['png', 'eps']:
-    output_fn = 'output/k2-c{}-field.{}'.format(CAMPAIGN, extension) 
+    output_fn = 'output/k2-c{}-field.{}'.format(CAMPAIGN, extension)
     print('Writing {}'.format(output_fn))
     pl.savefig(output_fn, dpi=100)
 

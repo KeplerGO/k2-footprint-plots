@@ -32,13 +32,13 @@ for ch in SUPERSTAMP["channels"]:
     v_col = SUPERSTAMP["channels"][ch]["vertices_col"]
     v_row = SUPERSTAMP["channels"][ch]["vertices_row"]
     radec = np.array([
-                        fov.getRaDecForChannelColRow(int(ch),
-                                                     v_col[idx],
-                                                     v_row[idx])
-                        for idx in range(len(v_col))
-                      ])
+        fov.getRaDecForChannelColRow(int(ch),
+                                     v_col[idx],
+                                     v_row[idx])
+        for idx in range(len(v_col))
+    ])
     patch = pl.fill(radec[:, 0], radec[:, 1],
-            lw=0, facecolor="#27ae60", zorder=100)
+                    lw=0, facecolor="#27ae60", zorder=100)
     superstamp_patches.append(patch)
 text = pl.text(268.6, -27.6, 'Microlensing\nsuperstamp', color='#27ae60',
                zorder=999, fontsize=22, va='center', ha='left')
