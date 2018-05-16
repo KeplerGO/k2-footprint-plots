@@ -4,20 +4,25 @@ import matplotlib.patheffects as path_effects
 from matplotlib.patches import Ellipse
 
 
-def annotate_target(ra, dec, text, ha='left', size=120, color='black',
-                    extended=False, globular=False, padding=0.22, zorder=999):
+def annotate_target(ras, decs, texts, ha='left',
+                    extended=False, globular=False, padding=0.22, fontsize=22, **kwargs):
+    if not hasattr(ras, '__iter__'):
+        ras = [ras]
+        decs = [decs]
+        texts = [texts]
+
     if extended:
-        padding = 1.82 * padding
-        el = Ellipse((ra, dec), width=0.5, height=0.18, zorder=zorder-1,
-                     facecolor='#888888', edgecolor=color, lw=2.)
-        pl.axes().add_artist(el)
-    elif globular:
-        pl.scatter(ra, dec, zorder=zorder-1, marker='o', lw=1.7, s=size, edgecolor=color, color="None")
-        pl.scatter(ra, dec, zorder=zorder-1, marker='+', lw=1.7, s=size, c=color)
+        for ra, dec in zip(ras, decs):
+            padding = 1.82 * padding
+            el = Ellipse((ra, dec), width=0.5, height=0.18,
+                         facecolor='#888888', lw=2.)
+            pl.axes().add_artist(el)
     else:
-        pl.scatter(ra, dec, zorder=zorder-1, marker='o', lw=0, s=size, c=color)
+        pl.plot(ras, decs, **kwargs)
     if ha == 'left':
         padding = -padding
-    text = pl.text(ra + padding, dec, text, zorder=zorder, fontsize=22, va='center', ha=ha, color=color)
-    text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
-                           path_effects.Normal()])
+    for ra, dec, text in zip(ras, decs, texts):
+        text = pl.text(ra + padding, dec, text, zorder=kwargs['zorder']+1,
+                       fontsize=fontsize, va='center', ha=ha)
+        text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
+                               path_effects.Normal()])
