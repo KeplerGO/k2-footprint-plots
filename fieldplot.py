@@ -16,9 +16,10 @@ def annotate_target(ras, decs, texts, ha='left',
         for ra, dec in zip(ras, decs):
             padding = 1.82 * padding
             if 'color' in kwargs:
-                el = Ellipse((ra, dec), width=0.5, height=0.18, lw=2., color=kwargs['color'])
+                el = Ellipse((ra, dec), width=0.5, height=0.18, lw=2.,
+                             color=kwargs['color'], zorder=kwargs['zorder'])
             else:
-                el = Ellipse((ra, dec), width=0.5, height=0.18, lw=2.)
+                el = Ellipse((ra, dec), width=0.5, height=0.18, lw=2., zorder=kwargs['zorder'])
             pl.axes().add_artist(el)
     else:
         pl.plot(ras, decs, **kwargs)

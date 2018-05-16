@@ -100,57 +100,69 @@ def annotate_supernova(CAMPAIGN):
 
 
 def annotate_extended():
-    annotate_target(283.77517, -22.70147, "NGC 6717", extended=True)
+    annotate_target(283.77517, -22.70147, "NGC 6717", extended=True, zorder=5)
     c = SkyCoord('16 23 35.22', '-26 31 32.7', unit=(u.hourangle, u.deg))
-    annotate_target(c.ra.deg, c.dec.deg, "M4", extended=True)
+    annotate_target(c.ra.deg, c.dec.deg, "M4", extended=True, zorder=5)
     c = SkyCoord('16 17 02.41', '-22 58 33.9', unit=(u.hourangle, u.deg))
-    annotate_target(c.ra.deg, c.dec.deg, "M80", extended=True)
+    annotate_target(c.ra.deg, c.dec.deg, "M80", extended=True, zorder=5)
     c = SkyCoord('16 25 35.11766', '-23 26 49.8150', unit=(u.hourangle, u.deg))
-    annotate_target(c.ra.deg, c.dec.deg, u"ρ Oph", extended=True)
+    annotate_target(c.ra.deg, c.dec.deg, u"ρ Oph", extended=True, zorder=5)
     c = SkyCoord('06 08 54.0', '+24 20 00', unit=(u.hourangle, u.deg))
-    annotate_target(c.ra.deg, c.dec.deg, "M35", extended=True)
+    annotate_target(c.ra.deg, c.dec.deg, "M35", extended=True, zorder=5)
     c = SkyCoord('06 55 00.9', '+18 01 14', unit=(u.hourangle, u.deg))
-    annotate_target(c.ra.deg, c.dec.deg, "NGC 2304", extended=True)
-    annotate_target(270.9042, -24.3867, "M8 (Lagoon Nebula)", extended=True)
-    annotate_target(273.5583, -17.9306, "W33 (OB stars)", extended=True)
-    annotate_target(75.9583, +23.77, "NGC 1746", extended=True, ha='right')
-    annotate_target(78.0625, +16.69, "NGC 1817", extended=True, ha='right')
-    annotate_target(71.4792, +19.115, "NGC 1647", extended=True, ha='right')
-    annotate_target(160.990554, +11.703611, "M95", extended=True)
-    annotate_target(161.690600, +11.819939, "M96", extended=True, ha='right')
-    annotate_target(161.956667, +12.581631, "M105", extended=True)
-    annotate_target(229.35167, -21.01011, "NGC 5897", ha='right', extended=True)
+    annotate_target(c.ra.deg, c.dec.deg, "NGC 2304", extended=True, zorder=5)
+    annotate_target(270.9042, -24.3867, "M8 (Lagoon Nebula)", extended=True, zorder=5)
+    annotate_target(273.5583, -17.9306, "W33 (OB stars)", extended=True, zorder=5)
+    annotate_target(75.9583, +23.77, "NGC 1746", extended=True, ha='right', zorder=5)
+    annotate_target(78.0625, +16.69, "NGC 1817", extended=True, ha='right', zorder=5)
+    annotate_target(71.4792, +19.115, "NGC 1647", extended=True, ha='right', zorder=5)
+    annotate_target(160.990554, +11.703611, "M95", extended=True, zorder=5)
+    annotate_target(161.690600, +11.819939, "M96", extended=True, ha='right', zorder=5)
+    annotate_target(161.956667, +12.581631, "M105", extended=True, zorder=5)
+    annotate_target(229.35167, -21.01011, "NGC 5897", ha='right', extended=True, zorder=5)
 
-    annotate_target(259.79908, -18.51625, "M9", marker='d', color=colors[0])
-    annotate_target(255.65704, -26.26794, "M19", marker='d', color=colors[0])
-    annotate_target(257.54342, -26.58172, "NGC 6293", marker='d', color=colors[0])
-    annotate_target(260.99437, -26.35342, "NGC 6355", ha='right', marker='d', color=colors[0])
-    annotate_target(267.02083, -24.78000, "Terzan 5", marker='d', color=colors[0])
+    annotate_target(259.79908, -18.51625, "M9", marker='d', color=colors[0], zorder=5)
+    annotate_target(255.65704, -26.26794, "M19", marker='d', color=colors[0], zorder=5)
+    annotate_target(257.54342, -26.58172, "NGC 6293", marker='d', color=colors[0], zorder=5)
+    annotate_target(260.99437, -26.35342, "NGC 6355", ha='right',
+                    marker='d', color=colors[0], zorder=5)
+    annotate_target(267.02083, -24.78000, "Terzan 5", marker='d', color=colors[0], zorder=5)
 
-    annotate_target(260.14296371, -19.33374974, "HD 156846", color=colors[0], marker='.')
-    annotate_target(268.118363, -26.703469, "V767 Sgr", color=colors[0], marker='.')
-    annotate_target(255.03962888, -24.98907067, "26 Oph", color=colors[0], marker='.')
-    annotate_target(258.83743307, -26.60282143, "36 Oph", color=colors[0], marker='.', ha='right')
-    annotate_target(353.616168, -1.580036, "WASP-28", color=colors[0], marker='.')
-    annotate_target(347.29469878, -02.26074375, "HD 218566", color=colors[0], marker='.')
-    annotate_target(346.62233, -5.04144, "TRAPPIST-1", ha='right', color=colors[0], marker='.')
-    annotate_target(351.77015194, -1.28627266, "GJ 9827", ha='right', color=colors[0], marker='.')
-    annotate_target(348.9490380, -10.8496960, "K2-138", color=colors[0], marker='.')
-    annotate_target(68.98016279, +16.50930235, "Aldebaran", ha='right', color=colors[0], marker='.')
-    annotate_target(69.31157942, +18.54303399, "SZ Tau", ha='right', color=colors[0], marker='.')
-    annotate_target(70.73241667, 18.95816667, "Gliese 176", color=colors[0], marker='.')
-    annotate_target(67.910154, +18.232681, "HL Tau", color=colors[0], marker='.')
-    annotate_target(69.824150, +22.350967, "LkCa 15", ha='right', color=colors[0], marker='.')
-    annotate_target(164.120271, +07.014658, "Wolf 359", ha='right', color=colors[0])
-    annotate_target(160.602432, +07.435026, "WASP-104", ha='right', color=colors[0])
-    annotate_target(158.20279865, +09.30658596, r'$\mathrm{\rho}$ Leo', ha='right', color=colors[0])
-    annotate_target(233.97117, -14.22006, "HP Lib (CV)", color=colors[0], marker='.')
-    annotate_target(229.98062, -25.00681, "GW Lib (CV)", color=colors[0], marker='.')
-    annotate_target(240.48106314, -21.98038959, "HIP 78530", color=colors[0], marker='.')
-    annotate_target(226.948721, -16.460728, "L5 Dwarf", ha='right', color=colors[0], marker='.')
-    annotate_target(232.39476389, -17.44094162, "33 Lib (CV)", color=colors[0], marker='.')
-    annotate_target(240.08335535, -22.62170643, "δ Sco", color=colors[0], marker='.')
-    annotate_target(126.61603759, +10.08037466, "HIP 41378")
+    annotate_target(260.14296371, -19.33374974, "HD 156846", color=colors[0], marker='.', zorder=5)
+    annotate_target(268.118363, -26.703469, "V767 Sgr", color=colors[0], marker='.', zorder=5)
+    annotate_target(255.03962888, -24.98907067, "26 Oph", color=colors[0], marker='.', zorder=5)
+    annotate_target(258.83743307, -26.60282143, "36 Oph",
+                    color=colors[0], marker='.', ha='right', zorder=5)
+    annotate_target(353.616168, -1.580036, "WASP-28", color=colors[0], marker='.', zorder=5)
+    annotate_target(347.29469878, -02.26074375, "HD 218566", color=colors[0], marker='.', zorder=5)
+    annotate_target(346.62233, -5.04144, "TRAPPIST-1", ha='right',
+                    color=colors[0], marker='.', zorder=5)
+    annotate_target(351.77015194, -1.28627266, "GJ 9827", ha='right',
+                    color=colors[0], marker='.', zorder=5)
+    annotate_target(348.9490380, -10.8496960, "K2-138", color=colors[0], marker='.', zorder=5)
+    annotate_target(68.98016279, +16.50930235, "Aldebaran",
+                    ha='right', color=colors[0], marker='.', zorder=5)
+    annotate_target(69.31157942, +18.54303399, "SZ Tau", ha='right',
+                    color=colors[0], marker='.', zorder=5)
+    annotate_target(70.73241667, 18.95816667, "Gliese 176", color=colors[0], marker='.', zorder=5)
+    annotate_target(67.910154, +18.232681, "HL Tau", color=colors[0], marker='.', zorder=5)
+    annotate_target(69.824150, +22.350967, "LkCa 15", ha='right',
+                    color=colors[0], marker='.', zorder=5)
+    annotate_target(164.120271, +07.014658, "Wolf 359", ha='right',
+                    color=colors[0], zorder=5, marker='.')
+    annotate_target(160.602432, +07.435026, "WASP-104", ha='right',
+                    color=colors[0], zorder=5, marker='.')
+    annotate_target(158.20279865, +09.30658596,
+                    r'$\mathrm{\rho}$ Leo', ha='right', color=colors[0], zorder=5, marker='.')
+    annotate_target(233.97117, -14.22006, "HP Lib (CV)", color=colors[0], marker='.', zorder=5)
+    annotate_target(229.98062, -25.00681, "GW Lib (CV)", color=colors[0], marker='.', zorder=5)
+    annotate_target(240.48106314, -21.98038959, "HIP 78530", color=colors[0], marker='.', zorder=5)
+    annotate_target(226.948721, -16.460728, "L5 Dwarf", ha='right',
+                    color=colors[0], marker='.', zorder=5)
+    annotate_target(232.39476389, -17.44094162, "33 Lib (CV)",
+                    color=colors[0], marker='.', zorder=5)
+    annotate_target(240.08335535, -22.62170643, "δ Sco", color=colors[0], marker='.', zorder=5)
+    annotate_target(126.61603759, +10.08037466, "HIP 41378", zorder=5)
 
 
 def annotate_microlensing():
@@ -216,5 +228,28 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     pl.close()
 
 
+_plot(14, planets=False)
+
+'''
+
+_plot(0)
+_plot(1)
+_plot(2)
+_plot(3)
+_plot(4)
+_plot(5)
+_plot(6)
+_plot(7)
+_plot(8)
+_plot(9)
+_plot(10)
+_plot(11, microlensing=False)
+_plot(12)
+_plot(13)
+_plot(14, planets=False)
+_plot(15)
 _plot(16, planets=False, supernovae=True)
 _plot(17, planets=False, supernovae=True)
+_plot(18)
+_plot(19)
+'''
