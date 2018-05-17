@@ -13,6 +13,8 @@ import pandas as pd
 CAMPAIGN = 1000
 
 style.use('wendy.mplstyle')
+colors = pl.rcParams["axes.prop_cycle"].by_key()["color"]
+
 p = plot.K2FootprintPlot(figsize=(11, 11))
 campaigns = np.arange(0, CAMPAIGN+1)
 p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white',
