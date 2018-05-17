@@ -18,11 +18,11 @@ colors = pl.rcParams["axes.prop_cycle"].by_key()["color"]
 xlims = [[107, 89], [182, 166], [256, 237], [346, 328],
          [69, 50.5], [139, 122.5], [213, 197], [297, 279], [25, 8],
          [279.5, 262], [194.5, 178.5], [269.5, 251.], [360, 343.], [82, 63.5],
-         [168, 153], [242.5, 225.5], [142, 125.5], [212.9, 195.5], [144, 120.5], [356.5, 339.]]
-ylims = [[12.5, 30], [-8, 10], [-31, -14], [-21, -2],
+         [168, 153], [242.5, 225.5], [142, 125.5], [212.9, 195.5], [139, 121.5], [356.5, 339.]]
+ylims = [[13.5, 31], [-7.5, 10.5], [-30, -13], [-20, -1],
          [10.5, 28.9], [9.5, 25.9], [-19, -2.5], [-31.5, -14.1], [-3, 15],
          [-29.8, -12.5], [-11.8, 5.], [-32, -15], [-13.5, 5], [12.5, 29.9],
-         [-1, 15.9], [-27.5, -11.5], [11.3, 27], [-16, 1.2], [9.5, 27], [-13.5, 5.5]]
+         [-1, 15.9], [-27.5, -11.5], [11.3, 27], [-16, 1.2], [8.5, 26], [-13.5, 5.5]]
 
 cluster_fnames = glob('catalogs/*.csv')
 
@@ -192,9 +192,9 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
 
     for c in campaigns[0:-1]:
         p.plot_campaign(c, annotate_channels=False, facecolor=colors[5],
-                        lw=1, edgecolor=colors[5], zorder=1, alpha=0.4)
+                        lw=1, edgecolor=colors[5], zorder=1, alpha=0.3)
     p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white',
-                    lw=1, edgecolor='#3498db', zorder=2)
+                    lw=1, edgecolor=colors[5], zorder=2)
 
     p.ax.xaxis.set_major_locator(MultipleLocator(2))
     p.ax.yaxis.set_major_locator(MultipleLocator(2))
@@ -228,10 +228,8 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     pl.close()
 
 
-_plot(14, planets=False)
-
+_plot(1)
 '''
-
 _plot(0)
 _plot(1)
 _plot(2)
