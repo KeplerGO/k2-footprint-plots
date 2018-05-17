@@ -13,6 +13,8 @@ from fieldplot import annotate_target
 from K2fov import getKeplerFov
 from K2fov.c9 import SUPERSTAMP
 
+EXTENSIONS = ['png', 'eps']
+
 style.use('wendy.mplstyle')
 colors = pl.rcParams["axes.prop_cycle"].by_key()["color"]
 xlims = [[107, 89], [182, 166], [256, 237], [346, 328],
@@ -28,6 +30,8 @@ cluster_fnames = glob('catalogs/*.csv')
 
 
 def annotate_planets(campaign):
+    if campaign == 18:
+        campaign = 5
     xlim = xlims[campaign]
     ylim = ylims[campaign]
     df = pd.read_csv('catalogs/k2candidates.csv',
@@ -73,7 +77,7 @@ def annotate_moving(campaign):
         c = SkyCoord(np.asarray(df.ra, dtype=str), np.asarray(
             df.dec, dtype=str), unit=(u.deg, u.deg))
         pl.plot(c.ra.deg, c.dec.deg, lw=4, zorder=500, c=colors[2])
-        text = pl.text(df.ra.mean() - 0.35, df.dec.mean() + 0.35, f.split('/')[-1].split('_')[0].capitalize(), zorder=999, style='italic',
+        text = pl.text(df.ra.mean() + 0.35, df.dec.mean() + 0.35, f.split('/')[-1].split('_')[0].capitalize(), zorder=999, style='italic',
                        fontsize=22, va='center', color=colors[2])
         text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                                path_effects.Normal()])
@@ -99,19 +103,20 @@ def annotate_supernova(CAMPAIGN):
                                    path_effects.Normal()])
 
 
-def annotate_extended():
-    annotate_target(283.77517, -22.70147, "NGC 6717", extended=True, zorder=5)
+def annotate_extended(CAMPAIGN):
+    annotate_target(283.77517, -22.70147, "NGC 6717", extended=True, zorder=5, ha='right')
     c = SkyCoord('16 23 35.22', '-26 31 32.7', unit=(u.hourangle, u.deg))
     annotate_target(c.ra.deg, c.dec.deg, "M4", extended=True, zorder=5)
     c = SkyCoord('16 17 02.41', '-22 58 33.9', unit=(u.hourangle, u.deg))
-    annotate_target(c.ra.deg, c.dec.deg, "M80", extended=True, zorder=5)
+    annotate_target(c.ra.deg, c.dec.deg, "M80", extended=True, zorder=5, ha='right')
     c = SkyCoord('16 25 35.11766', '-23 26 49.8150', unit=(u.hourangle, u.deg))
-    annotate_target(c.ra.deg, c.dec.deg, u"ρ Oph", extended=True, zorder=5)
+    annotate_target(c.ra.deg, c.dec.deg, u"ρ Oph", extended=True, zorder=5, ha='right')
     c = SkyCoord('06 08 54.0', '+24 20 00', unit=(u.hourangle, u.deg))
     annotate_target(c.ra.deg, c.dec.deg, "M35", extended=True, zorder=5)
     c = SkyCoord('06 55 00.9', '+18 01 14', unit=(u.hourangle, u.deg))
     annotate_target(c.ra.deg, c.dec.deg, "NGC 2304", extended=True, zorder=5)
-    annotate_target(270.9042, -24.3867, "M8 (Lagoon Nebula)", extended=True, zorder=5)
+    if CAMPAIGN != 11:
+        annotate_target(270.9042, -24.3867, "M8 (Lagoon Nebula)", extended=True, zorder=5)
     annotate_target(273.5583, -17.9306, "W33 (OB stars)", extended=True, zorder=5)
     annotate_target(75.9583, +23.77, "NGC 1746", extended=True, ha='right', zorder=5)
     annotate_target(78.0625, +16.69, "NGC 1817", extended=True, ha='right', zorder=5)
@@ -122,26 +127,33 @@ def annotate_extended():
     annotate_target(229.35167, -21.01011, "NGC 5897", ha='right', extended=True, zorder=5)
 
     annotate_target(259.79908, -18.51625, "M9", marker='d', color=colors[0], zorder=5)
-    annotate_target(255.65704, -26.26794, "M19", marker='d', color=colors[0], zorder=5)
-    annotate_target(257.54342, -26.58172, "NGC 6293", marker='d', color=colors[0], zorder=5)
-    annotate_target(260.99437, -26.35342, "NGC 6355", ha='right',
-                    marker='d', color=colors[0], zorder=5)
+    if CAMPAIGN != 2:
+        annotate_target(255.65704, -26.26794, "M19", marker='d', color=colors[0], zorder=5)
+    if CAMPAIGN != 2:
+        annotate_target(257.54342, -26.58172, "NGC 6293", marker='d', color=colors[0], zorder=5)
+    if CAMPAIGN != 9:
+        annotate_target(260.99437, -26.35342, "NGC 6355", ha='right',
+                        marker='d', color=colors[0], zorder=5)
     annotate_target(267.02083, -24.78000, "Terzan 5", marker='d', color=colors[0], zorder=5)
 
     annotate_target(260.14296371, -19.33374974, "HD 156846", color=colors[0], marker='.', zorder=5)
-    annotate_target(268.118363, -26.703469, "V767 Sgr", color=colors[0], marker='.', zorder=5)
-    annotate_target(255.03962888, -24.98907067, "26 Oph", color=colors[0], marker='.', zorder=5)
+    if CAMPAIGN != 9:
+        annotate_target(268.118363, -26.703469, "V767 Sgr", color=colors[0], marker='.', zorder=5)
+    if CAMPAIGN != 2:
+        annotate_target(255.03962888, -24.98907067, "26 Oph", color=colors[0], marker='.', zorder=5)
     annotate_target(258.83743307, -26.60282143, "36 Oph",
                     color=colors[0], marker='.', ha='right', zorder=5)
     annotate_target(353.616168, -1.580036, "WASP-28", color=colors[0], marker='.', zorder=5)
     annotate_target(347.29469878, -02.26074375, "HD 218566", color=colors[0], marker='.', zorder=5)
     annotate_target(346.62233, -5.04144, "TRAPPIST-1", ha='right',
                     color=colors[0], marker='.', zorder=5)
-    annotate_target(351.77015194, -1.28627266, "GJ 9827", ha='right',
+    annotate_target(351.77015194, -1.28627266, "GJ 9827", ha='left',
                     color=colors[0], marker='.', zorder=5)
     annotate_target(348.9490380, -10.8496960, "K2-138", color=colors[0], marker='.', zorder=5)
     annotate_target(68.98016279, +16.50930235, "Aldebaran",
                     ha='right', color=colors[0], marker='.', zorder=5)
+    annotate_target(201.29824736, -11.16131949, "Spica",
+                    ha='left', color=colors[0], marker='.', zorder=5)
     annotate_target(69.31157942, +18.54303399, "SZ Tau", ha='right',
                     color=colors[0], marker='.', zorder=5)
     annotate_target(70.73241667, 18.95816667, "Gliese 176", color=colors[0], marker='.', zorder=5)
@@ -156,13 +168,18 @@ def annotate_extended():
                     r'$\mathrm{\rho}$ Leo', ha='right', color=colors[0], zorder=5, marker='.')
     annotate_target(233.97117, -14.22006, "HP Lib (CV)", color=colors[0], marker='.', zorder=5)
     annotate_target(229.98062, -25.00681, "GW Lib (CV)", color=colors[0], marker='.', zorder=5)
-    annotate_target(240.48106314, -21.98038959, "HIP 78530", color=colors[0], marker='.', zorder=5)
+    annotate_target(240.48106314, -21.98038959, "HIP 78530", color=colors[0],
+                    marker='.', zorder=5, ha='left')
     annotate_target(226.948721, -16.460728, "L5 Dwarf", ha='right',
                     color=colors[0], marker='.', zorder=5)
     annotate_target(232.39476389, -17.44094162, "33 Lib (CV)",
                     color=colors[0], marker='.', zorder=5)
     annotate_target(240.08335535, -22.62170643, "δ Sco", color=colors[0], marker='.', zorder=5)
-    annotate_target(126.61603759, +10.08037466, "HIP 41378", zorder=5)
+    if CAMPAIGN != 16:
+        annotate_target(126.61603759, +10.08037466, "HIP 41378",
+                        color=colors[0], marker='.', zorder=5, ha='right')
+    annotate_target(133.70364554, +20.10851139, "OJ 287", ha='right', extended=True, zorder=5)
+    annotate_target(187.27789633, +2.05240633, "3C 273", ha='right', extended=True, zorder=5)
 
 
 def annotate_microlensing():
@@ -201,12 +218,11 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     pl.tight_layout()
 
     if planets:
-        for c in campaigns:
-            annotate_planets(c)
+        annotate_planets(CAMPAIGN)
     if moving:
         annotate_moving(CAMPAIGN)
     if extended:
-        annotate_extended()
+        annotate_extended(CAMPAIGN)
     if microlensing:
         annotate_microlensing()
     if clusters:
@@ -217,34 +233,37 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     pl.xlim(xlims[CAMPAIGN])
     pl.ylim(ylims[CAMPAIGN])
 
-    for extension in ['png', 'eps']:
+    for extension in EXTENSIONS:
         output_fn = 'output/k2-c{:02}-field-notitle.{}'.format(CAMPAIGN, extension)
+        print('Writing {}'.format(output_fn))
         pl.savefig(output_fn, dpi=100)
 
     pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
-    for extension in ['png', 'eps']:
+    for extension in EXTENSIONS:
         output_fn = 'output/k2-c{:02}-field.{}'.format(CAMPAIGN, extension)
+        print('Writing {}'.format(output_fn))
         pl.savefig(output_fn, dpi=100)
     pl.close()
 
 
-_plot(0)
-_plot(1)
-_plot(2)
-_plot(3, extended=False)
-_plot(4)
-_plot(5)
-_plot(6)
-_plot(7)
-_plot(8)
-_plot(9)
-_plot(10)
-_plot(11, microlensing=False, clusters=False)
-_plot(12)
-_plot(13)
-_plot(14, planets=False)
-_plot(15)
-_plot(16, planets=False, supernovae=True)
-_plot(17, planets=False, supernovae=True)
-_plot(18)
-_plot(19)
+if __name__ == '__main__':
+    _plot(0)
+    _plot(1)
+    _plot(2)
+    _plot(3, extended=False)
+    _plot(4)
+    _plot(5)
+    _plot(6)
+    _plot(7)
+    _plot(8)
+    _plot(9)
+    _plot(10)
+    _plot(11, microlensing=False, clusters=False)
+    _plot(12)
+    _plot(13)
+    _plot(14, planets=False)
+    _plot(15)
+    _plot(16, planets=False, supernovae=True)
+    _plot(17, planets=False, supernovae=True)
+    _plot(18)
+    _plot(19)
