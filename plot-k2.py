@@ -228,12 +228,10 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     pl.close()
 
 
-_plot(1)
-'''
 _plot(0)
 _plot(1)
 _plot(2)
-_plot(3)
+_plot(3, extended=False)
 _plot(4)
 _plot(5)
 _plot(6)
@@ -241,7 +239,7 @@ _plot(7)
 _plot(8)
 _plot(9)
 _plot(10)
-_plot(11, microlensing=False)
+_plot(11, microlensing=False, clusters=False)
 _plot(12)
 _plot(13)
 _plot(14, planets=False)
@@ -250,4 +248,3 @@ _plot(16, planets=False, supernovae=True)
 _plot(17, planets=False, supernovae=True)
 _plot(18)
 _plot(19)
-'''
