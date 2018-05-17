@@ -1,4 +1,4 @@
-# Beautiful footprints of Kepler/K2's Campaigns
+# Beautiful footprints of Kepler's observing fields
 
 | | | |
 | ----- | ----- | ----- |
