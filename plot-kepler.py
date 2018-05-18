@@ -23,18 +23,23 @@ p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white',
 df = pd.read_csv("catalogs/kepler-confirmed-planets.csv")
 pl.scatter(df.ra, df.dec, zorder=99, s=5)
 text = pl.text(285.5, 36.8, 'Black dots show\nconfirmed planets', zorder=999, style='italic',
-               fontsize=16, va='center', ha='left')
+               fontsize=18, va='center', ha='left')
 text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='white'),
                        path_effects.Normal()])
 
-annotate_target(301.5643971, +44.4568869, "Tabby's Star", marker='.', zorder=5)
-annotate_target(290.2208, +37.7717, "NGC 6791", extended=True, zorder=5)
-annotate_target(295.3250, +40.1867, "NGC 6819", extended=True, zorder=5)
-annotate_target(294.3208, +46.3883, "NGC 6811", extended=True, zorder=5)
+# Well-known stars
+annotate_target(301.5643971, +44.4568869, "Tabby's Star", marker='.', zorder=5, color=colors[0])
+annotate_target(291.3663037, +42.7843592, "RR Lyrae", marker='.', zorder=5, color=colors[0])
 
+# Well-known planets
 annotate_target(285.679429, +50.241319, "Kepler-10b", zorder=5)
 annotate_target(289.075729, +51.757433, "Kepler-16b", zorder=5)
 annotate_target(298.652713, +43.955017, "Kepler-186f", zorder=5)
+
+# Open clusters
+annotate_target(290.2208, +37.7717, "NGC 6791", extended=True, zorder=5)
+annotate_target(295.3250, +40.1867, "NGC 6819", extended=True, zorder=5)
+annotate_target(294.3208, +46.3883, "NGC 6811", extended=True, zorder=5)
 
 pl.xlim([303, 279])
 pl.ylim([36.01, 53.99])
