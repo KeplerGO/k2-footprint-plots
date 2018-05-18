@@ -143,7 +143,7 @@ def annotate_extended(CAMPAIGN):
         annotate_target(255.03962888, -24.98907067, "26 Oph", color=colors[0], marker='.', zorder=5)
     annotate_target(258.83743307, -26.60282143, "36 Oph",
                     color=colors[0], marker='.', ha='right', zorder=5)
-    annotate_target(353.616168, -1.580036, "WASP-28", color=colors[0], marker='.', zorder=5)
+    annotate_target(353.616168, -1.580036, "WASP-28", color=colors[0], marker='.', zorder=5, ha='right')
     annotate_target(347.29469878, -02.26074375, "HD 218566", color=colors[0], marker='.', zorder=5)
     annotate_target(346.62233, -5.04144, "TRAPPIST-1", ha='right',
                     color=colors[0], marker='.', zorder=5)
@@ -178,7 +178,8 @@ def annotate_extended(CAMPAIGN):
     if CAMPAIGN != 16:
         annotate_target(126.61603759, +10.08037466, "HIP 41378",
                         color=colors[0], marker='.', zorder=5, ha='right')
-    annotate_target(133.70364554, +20.10851139, "OJ 287", ha='right', extended=True, zorder=5)
+    if CAMPAIGN != 16:
+        annotate_target(133.70364554, +20.10851139, "OJ 287", ha='right', extended=True, zorder=5)
     annotate_target(187.27789633, +2.05240633, "3C 273", ha='right', extended=True, zorder=5)
     annotate_target(71.4792, +19.115, "NGC 1647", ha='right', extended=True, zorder=5)
 
@@ -247,7 +248,7 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     pl.close()
 
 
-if __name__ == '__main__':
+def plot_all():
     _plot(0)
     _plot(1)
     _plot(2)
@@ -268,3 +269,8 @@ if __name__ == '__main__':
     _plot(17, planets=False, supernovae=True)
     _plot(18)
     _plot(19)
+
+
+if __name__ == '__main__':
+    plot_all()
+    
