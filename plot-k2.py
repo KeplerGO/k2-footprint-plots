@@ -17,14 +17,22 @@ EXTENSIONS = ['png', 'eps']
 
 style.use('wendy.mplstyle')
 colors = pl.rcParams["axes.prop_cycle"].by_key()["color"]
-xlims = [[107, 89], [182, 166], [256, 237], [346, 328],
-         [69, 50.5], [139, 122.5], [213, 197], [297, 279], [25, 8],
-         [279.5, 262], [194.5, 178.5], [269.5, 251.], [360, 343.], [82, 63.5],
-         [168, 153], [242.5, 225.5], [142, 125.5], [212.9, 195.5], [139, 121.5], [356.5, 339.]]
-ylims = [[13.5, 31], [-7.5, 10.5], [-30, -13], [-20, -1],
-         [10.5, 28.9], [9.5, 25.9], [-19, -2.5], [-31.5, -14.1], [-3, 15],
-         [-29.8, -12.5], [-11.8, 5.], [-32, -15], [-13.5, 5], [12.5, 29.9],
-         [-1, 15.9], [-27.5, -11.5], [11.3, 27], [-16, 1.2], [8.5, 26], [-13.5, 5.5]]
+xlims = {
+         0: [107, 89], 1: [182, 166], 2: [256, 237], 3: [346, 328],
+         4: [69, 50.5], 5: [139, 122.5], 6: [213, 197], 7: [297, 279], 8: [25, 8],
+         9: [279.5, 262], 10: [194.5, 178.5], 11: [269.5, 251.], 12: [360, 343.], 13: [82, 63.5],
+         14: [168, 153], 15: [242.5, 225.5], 16: [142, 125.5], 17: [212.9, 195.5],
+         18: [139, 121.5], 19: [356.5, 339.],
+         1002: [367, 350.5]
+         }
+ylims = {
+         0: [13.5, 31], 1: [-7.5, 10.5], 2: [-30, -13], 3: [-20, -1],
+         4: [10.5, 28.9], 5: [9.5, 25.9], 6: [-19, -2.5], 7: [-31.5, -14.1], 8: [-3, 15],
+         9: [-29.8, -12.5], 10: [-11.8, 5.], 11: [-32, -15], 12: [-13.5, 5], 13: [12.5, 29.9],
+         14: [-1, 15.9], 15: [-27.5, -11.5], 16: [11.3, 27], 17: [-16, 1.2],
+         18: [8.5, 26], 19: [-13.5, 5.5],
+         1002: [-11, 7.5]
+         }
 
 cluster_fnames = glob('catalogs/*.csv')
 
@@ -40,7 +48,7 @@ def annotate_planets(campaign):
     df['pl_hostname'] = [' '.join(d.split(' ')[0:-1]) for d in df['pl_name']]
     df['pl_letter'] = [d.split(' ')[-1] for d in df['pl_name']]
     letters = np.asarray(df[['pl_hostname', 'pl_letter']].groupby(
-        'pl_hostname')['pl_letter'].apply(lambda x: ''.join(x)))
+        'pl_hostname')['pl_letter'].apply(lambda x: ''.join(np.sort(x))))
     df = df[['pl_hostname', 'ra', 'dec']].groupby('pl_hostname').max()
     df['pl_letters'] = letters
     ra, dec = np.asarray(df.ra), np.asarray(df.dec)
@@ -137,16 +145,17 @@ def annotate_extended(CAMPAIGN):
                         marker='d', color=colors[0], zorder=5)
     annotate_target(267.02083, -24.78000, "Terzan 5", marker='d', color=colors[0], zorder=5)
 
-    annotate_target(260.14296371, -19.33374974, "HD 156846", color=colors[0], marker='.', zorder=5)
+    annotate_target(260.14296371, -19.33374974, "HD 156846 b", color=colors[0], marker='.', zorder=5)
     if CAMPAIGN != 9:
         annotate_target(268.118363, -26.703469, "V767 Sgr", color=colors[0], marker='.', zorder=5)
     if CAMPAIGN != 2:
         annotate_target(255.03962888, -24.98907067, "26 Oph", color=colors[0], marker='.', zorder=5)
     annotate_target(258.83743307, -26.60282143, "36 Oph",
                     color=colors[0], marker='.', ha='right', zorder=5)
-    annotate_target(353.616168, -1.580036, "WASP-28", color=colors[0], marker='.', zorder=5, ha='right')
-    annotate_target(347.29469878, -02.26074375, "HD 218566", color=colors[0], marker='.', zorder=5)
-    annotate_target(346.62233, -5.04144, "TRAPPIST-1", ha='right',
+    annotate_target(353.616168, -1.580036, "WASP-28 b", color=colors[0], marker='.', zorder=5, ha='right')
+    if CAMPAIGN != 19:
+        annotate_target(347.29469878, -02.26074375, "HD 218566 b", color=colors[0], marker='.', zorder=5)
+    annotate_target(346.62233, -5.04144, "TRAPPIST-1", ha='left',
                     color=colors[0], marker='.', zorder=5)
     annotate_target(351.77015194, -1.28627266, "GJ 9827", ha='left',
                     color=colors[0], marker='.', zorder=5)
@@ -183,9 +192,10 @@ def annotate_extended(CAMPAIGN):
         annotate_target(133.70364554, +20.10851139, "OJ 287", ha='right', extended=True, zorder=5)
     annotate_target(187.27789633, +2.05240633, "3C 273", ha='right', extended=True, zorder=5)
     annotate_target(71.4792, +19.115, "NGC 1647", ha='right', extended=True, zorder=5)
-    annotate_target(16.2258, +2.1333, "IC1613", ha='left', extended=True, zorder=5)
-
-
+    annotate_target(16.2258, +2.1333, "IC 1613", ha='left', extended=True, zorder=5)
+    if CAMPAIGN != 19:
+        annotate_target(353.9553542, 0.4455122, "HIP 116454 b", ha='left', color=colors[0], marker='.', zorder=5)
+    annotate_target(8.739684, 4.381469, "HD 3167 bcd", ha='right', color=colors[0], marker='.', zorder=5)
 
 
 def annotate_microlensing():
@@ -211,11 +221,15 @@ def annotate_microlensing():
 
 def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, microlensing=True, supernovae=False):
     p = plot.K2FootprintPlot(figsize=(11, 11))
-    campaigns = np.arange(0, CAMPAIGN+1)
 
-    for c in campaigns[0:-1]:
-        p.plot_campaign(c, annotate_channels=False, facecolor=colors[5],
+    # Plot previous campaigns in the background
+    if CAMPAIGN != 1002:
+        for c in np.arange(0, CAMPAIGN + 1)[0:-1]:
+            p.plot_campaign(c, annotate_channels=False, facecolor=colors[5],
+                            lw=1, edgecolor=colors[5], zorder=1, alpha=0.3)
+        p.plot_campaign(1002, annotate_channels=False, facecolor=colors[5],
                         lw=1, edgecolor=colors[5], zorder=1, alpha=0.3)
+
     p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white',
                     lw=1, edgecolor=colors[5], zorder=2)
 
@@ -244,7 +258,11 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
         print('Writing {}'.format(output_fn))
         pl.savefig(output_fn, dpi=100)
 
-    pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
+    if CAMPAIGN == 1002:
+        pl.suptitle('K2 Concept Engineering Test', fontsize=44)
+    else:
+        pl.suptitle('K2 Campaign {}'.format(CAMPAIGN), fontsize=44)
+
     for extension in EXTENSIONS:
         output_fn = 'output/k2-c{:02}-field.{}'.format(CAMPAIGN, extension)
         print('Writing {}'.format(output_fn))
