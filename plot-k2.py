@@ -77,7 +77,8 @@ def annotate_moving(campaign):
         c = SkyCoord(np.asarray(df.ra, dtype=str), np.asarray(
             df.dec, dtype=str), unit=(u.deg, u.deg))
         pl.plot(c.ra.deg, c.dec.deg, lw=4, zorder=500, c=colors[2])
-        text = pl.text(df.ra.mean() + 0.35, df.dec.mean() + 0.35, f.split('/')[-1].split('_')[0].capitalize(), zorder=999, style='italic',
+        text = pl.text(df.ra.mean() + 0.35, df.dec.mean() + 0.35,
+                       f.split('/')[-1].split('_')[0], zorder=999, style='italic',
                        fontsize=22, va='center', color=colors[2])
         text.set_path_effects([path_effects.Stroke(linewidth=4, foreground='white'),
                                path_effects.Normal()])
@@ -182,6 +183,9 @@ def annotate_extended(CAMPAIGN):
         annotate_target(133.70364554, +20.10851139, "OJ 287", ha='right', extended=True, zorder=5)
     annotate_target(187.27789633, +2.05240633, "3C 273", ha='right', extended=True, zorder=5)
     annotate_target(71.4792, +19.115, "NGC 1647", ha='right', extended=True, zorder=5)
+    annotate_target(16.2258, +2.1333, "IC1613", ha='left', extended=True, zorder=5)
+
+
 
 
 def annotate_microlensing():
