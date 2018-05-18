@@ -22,9 +22,9 @@ p.plot_campaign(CAMPAIGN, annotate_channels=False, facecolor='white',
 
 df = pd.read_csv("catalogs/kepler-confirmed-planets.csv")
 pl.scatter(df.ra, df.dec, zorder=99, s=5)
-text = pl.text(290.5, 45.5, '>2,300 confirmed exoplanets', zorder=999, style='italic',
-               fontsize=32, va='center', ha='center')
-text.set_path_effects([path_effects.Stroke(linewidth=8, foreground='white'),
+text = pl.text(285.5, 36.8, 'Black dots show\nconfirmed planets', zorder=999, style='italic',
+               fontsize=16, va='center', ha='left')
+text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='white'),
                        path_effects.Normal()])
 
 annotate_target(301.5643971, +44.4568869, "Tabby's Star", marker='.', zorder=5)

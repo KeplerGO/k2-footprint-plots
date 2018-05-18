@@ -180,6 +180,7 @@ def annotate_extended(CAMPAIGN):
                         color=colors[0], marker='.', zorder=5, ha='right')
     annotate_target(133.70364554, +20.10851139, "OJ 287", ha='right', extended=True, zorder=5)
     annotate_target(187.27789633, +2.05240633, "3C 273", ha='right', extended=True, zorder=5)
+    annotate_target(71.4792, +19.115, "NGC 1647", ha='right', extended=True, zorder=5)
 
 
 def annotate_microlensing():
