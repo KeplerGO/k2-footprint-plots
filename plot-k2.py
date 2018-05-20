@@ -18,19 +18,23 @@ EXTENSIONS = ['png', 'eps']
 style.use('wendy.mplstyle')
 colors = pl.rcParams["axes.prop_cycle"].by_key()["color"]
 xlims = {
-         0: [107, 89], 1: [182, 166], 2: [256, 237], 3: [346, 328],
-         4: [69, 50.5], 5: [139, 122.5], 6: [213, 197], 7: [297, 279], 8: [25, 8],
-         9: [279.5, 262], 10: [194.5, 178.5], 11: [269.5, 251.], 12: [360, 343.], 13: [82, 63.5],
-         14: [168, 153], 15: [242.5, 225.5], 16: [142, 125.5], 17: [212.9, 195.5],
-         18: [139, 121.5], 19: [356.5, 339.],
+         0: [107, 89], 1: [182, 166], 2: [256, 237],
+         3: [346, 328], 4: [69, 50.5], 5: [139, 122.5],
+         6: [213, 197], 7: [297, 279], 8: [25, 8],
+         9: [279.5, 262], 10: [194.5, 178.5], 11: [269.5, 251.],
+         12: [360, 343.], 13: [82, 63.5], 14: [168, 153],
+         15: [242.5, 225.5], 16: [142, 125.5], 17: [212.9, 195.5],
+         18: [139, 121.5], 19: [356.5, 339.], 20: [77.5, 58.5],
          1002: [367, 350.5]
          }
 ylims = {
-         0: [13.5, 31], 1: [-7.5, 10.5], 2: [-30, -13], 3: [-20, -1],
-         4: [10.5, 28.9], 5: [9.5, 25.9], 6: [-19, -2.5], 7: [-31.5, -14.1], 8: [-3, 15],
-         9: [-29.8, -12.5], 10: [-11.8, 5.], 11: [-32, -15], 12: [-13.5, 5], 13: [12.5, 29.9],
-         14: [-1, 15.9], 15: [-27.5, -11.5], 16: [11.3, 27], 17: [-16, 1.2],
-         18: [8.5, 26], 19: [-13.5, 5.5],
+         0: [13.5, 31], 1: [-7.5, 10.5], 2: [-30, -13],
+         3: [-20, -1], 4: [10.5, 28.9], 5: [9.5, 25.9],
+         6: [-19, -2.5], 7: [-31.5, -14.1], 8: [-3, 15],
+         9: [-29.8, -12.5], 10: [-11.8, 5.], 11: [-32, -15],
+         12: [-13.5, 5], 13: [12.5, 29.9], 14: [-1, 15.9],
+         15: [-27.5, -11.5], 16: [11.3, 27], 17: [-16, 1.2],
+         18: [8.5, 26], 19: [-13.5, 5.5], 20: [14.5, 32],
          1002: [-11, 7.5]
          }
 
@@ -126,10 +130,9 @@ def annotate_extended(CAMPAIGN):
     annotate_target(c.ra.deg, c.dec.deg, "NGC 2304", extended=True, zorder=5)
     if CAMPAIGN != 11:
         annotate_target(270.9042, -24.3867, "M8 (Lagoon Nebula)", extended=True, zorder=5)
-    annotate_target(273.5583, -17.9306, "W33 (OB stars)", extended=True, zorder=5)
-    annotate_target(75.9583, +23.77, "NGC 1746", extended=True, ha='right', zorder=5)
-    annotate_target(78.0625, +16.69, "NGC 1817", extended=True, ha='right', zorder=5)
-    annotate_target(71.4792, +19.115, "NGC 1647", extended=True, ha='right', zorder=5)
+        annotate_target(273.5583, -17.9306, "W33 (OB stars)", extended=True, zorder=5)
+    annotate_target(75.9583, +23.77, "NGC 1746", extended=True, ha='left', zorder=5)
+    annotate_target(71.4792, +19.115, "NGC 1647", extended=True, ha='left', zorder=5)
     annotate_target(160.990554, +11.703611, "M95", extended=True, zorder=5)
     annotate_target(161.690600, +11.819939, "M96", extended=True, ha='right', zorder=5)
     annotate_target(161.956667, +12.581631, "M105", extended=True, zorder=5)
@@ -164,10 +167,14 @@ def annotate_extended(CAMPAIGN):
                     ha='right', color=colors[0], marker='.', zorder=5)
     annotate_target(201.29824736, -11.16131949, "Spica",
                     ha='left', color=colors[0], marker='.', zorder=5)
-    annotate_target(69.31157942, +18.54303399, "SZ Tau", ha='right',
-                    color=colors[0], marker='.', zorder=5)
-    annotate_target(70.73241667, 18.95816667, "Gliese 176", color=colors[0], marker='.', zorder=5)
-    annotate_target(67.910154, +18.232681, "HL Tau", color=colors[0], marker='.', zorder=5)
+    if CAMPAIGN != 20:
+        annotate_target(69.31157942, +18.54303399, "SZ Tau", ha='right',
+                        color=colors[0], marker='.', zorder=5)
+        annotate_target(70.73241667, 18.95816667, "Gliese 176", color=colors[0],
+                        marker='.', zorder=5)
+        annotate_target(67.910154, +18.232681, "HL Tau", color=colors[0],
+                        marker='.', zorder=5)
+        annotate_target(78.0625, +16.69, "NGC 1817", extended=True, ha='right', zorder=5)
     annotate_target(69.824150, +22.350967, "LkCa 15", ha='right',
                     color=colors[0], marker='.', zorder=5)
     annotate_target(164.120271, +07.014658, "Wolf 359", ha='right',
@@ -191,7 +198,6 @@ def annotate_extended(CAMPAIGN):
     if CAMPAIGN != 16:
         annotate_target(133.70364554, +20.10851139, "OJ 287", ha='right', extended=True, zorder=5)
     annotate_target(187.27789633, +2.05240633, "3C 273", ha='right', extended=True, zorder=5)
-    annotate_target(71.4792, +19.115, "NGC 1647", ha='right', extended=True, zorder=5)
     annotate_target(16.2258, +2.1333, "IC 1613", ha='left', extended=True, zorder=5)
     if CAMPAIGN != 19:
         annotate_target(353.9553542, 0.4455122, "HIP 116454 b", ha='left', color=colors[0], marker='.', zorder=5)
