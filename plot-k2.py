@@ -175,6 +175,7 @@ def annotate_extended(CAMPAIGN):
         annotate_target(67.910154, +18.232681, "HL Tau", color=colors[0],
                         marker='.', zorder=5)
         annotate_target(78.0625, +16.69, "NGC 1817", extended=True, ha='right', zorder=5)
+    annotate_target(65.4976338, +19.5351167, "T Tau", color=colors[0], marker='.', zorder=5)
     annotate_target(69.824150, +22.350967, "LkCa 15", ha='right',
                     color=colors[0], marker='.', zorder=5)
     annotate_target(164.120271, +07.014658, "Wolf 359", ha='right',
@@ -262,7 +263,7 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     for extension in EXTENSIONS:
         output_fn = 'output/k2-c{:02}-field-notitle.{}'.format(CAMPAIGN, extension)
         print('Writing {}'.format(output_fn))
-        pl.savefig(output_fn, dpi=100)
+        pl.savefig(output_fn, dpi=300)
 
     if CAMPAIGN == 1002:
         pl.suptitle('K2 Concept Engineering Test', fontsize=44)
@@ -272,7 +273,7 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     for extension in EXTENSIONS:
         output_fn = 'output/k2-c{:02}-field.{}'.format(CAMPAIGN, extension)
         print('Writing {}'.format(output_fn))
-        pl.savefig(output_fn, dpi=100)
+        pl.savefig(output_fn, dpi=300)
     pl.close()
 
 
