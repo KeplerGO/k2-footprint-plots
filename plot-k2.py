@@ -170,8 +170,8 @@ def annotate_extended(CAMPAIGN):
                     ha='right', color=colors[0], marker='.', zorder=5)
     annotate_target(201.29824736, -11.16131949, "Spica",
                     ha='left', color=colors[0], marker='.', zorder=5)
-    annotate_target(68.466687, 22.841717, "CL Tau", color=colors[0],
-                    marker='.', zorder=5)
+    #annotate_target(68.466687, 22.841717, "CL Tau", color=colors[0],
+    #                marker='.', zorder=5)
     if CAMPAIGN != 20:
         annotate_target(69.31157942, +18.54303399, "SZ Tau", ha='right',
                         color=colors[0], marker='.', zorder=5)
@@ -233,7 +233,8 @@ def annotate_microlensing():
                            path_effects.Normal()])
 
 
-def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, microlensing=True, supernovae=False):
+def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True,
+          microlensing=True, supernovae=False, dpi=100):
     p = plot.K2FootprintPlot(figsize=(11, 11))
 
     # Plot previous campaigns in the background
@@ -270,7 +271,7 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     for extension in EXTENSIONS:
         output_fn = 'output/k2-c{:02}-field-notitle.{}'.format(CAMPAIGN, extension)
         print('Writing {}'.format(output_fn))
-        pl.savefig(output_fn, dpi=300)
+        pl.savefig(output_fn, dpi=dpi)
 
     if CAMPAIGN == 1002:
         pl.suptitle('K2 Concept Engineering Test', fontsize=44)
@@ -280,7 +281,7 @@ def _plot(CAMPAIGN=1, planets=True, clusters=True, moving=True, extended=True, m
     for extension in EXTENSIONS:
         output_fn = 'output/k2-c{:02}-field.{}'.format(CAMPAIGN, extension)
         print('Writing {}'.format(output_fn))
-        pl.savefig(output_fn, dpi=300)
+        pl.savefig(output_fn, dpi=dpi)
     pl.close()
 
 
